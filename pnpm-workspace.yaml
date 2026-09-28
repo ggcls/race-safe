@@ -1,0 +1,7 @@
+minimumReleaseAgeExclude:
+  - '@antfu/eslint-config@9.2.0'
+
+shellEmulator: true
+
+allowBuilds:
+  simple-git-hooks: true

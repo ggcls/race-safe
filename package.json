@@ -1,0 +1,70 @@
+{
+  "name": "@ggcls/race-safe",
+  "type": "module",
+  "version": "0.1.0",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.0.0",
+      "onFail": "download"
+    },
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.24.0",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@11.24.0",
+  "description": "Tiny concurrency strategies for async JavaScript functions.",
+  "license": "MIT",
+  "repository": "ggcls/race-safe",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "vitest dev",
+    "lint": "eslint .",
+    "prepare": "simple-git-hooks",
+    "prepack": "pnpm build",
+    "prepublishOnly": "pnpm check",
+    "release": "pnpm test && bumpp",
+    "test": "pnpm test:unit && pnpm test:types",
+    "test:unit": "vitest run",
+    "test:types": "tsc --noEmit && tsc --noEmit -p tsconfig.tools.json",
+    "check": "pnpm lint && pnpm test && pnpm build",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "@vitest/coverage-v8": "5.0.1",
+    "bumpp": "12.2.2",
+    "eslint": "10.11.0",
+    "eslint-config-unjs": "^0.6.2",
+    "lint-staged": "17.4.1",
+    "pkg-pr-new": "0.0.88",
+    "prettier": "^3.9.9",
+    "simple-git-hooks": "2.14.0",
+    "tsdown": "0.22.14",
+    "typescript": "6.0.3",
+    "vitest": "5.0.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,mjs,cjs,json,.*rc}": [
+      "pnpm eslint --fix"
+    ]
+  }
+}
